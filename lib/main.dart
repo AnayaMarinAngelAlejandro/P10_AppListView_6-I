@@ -1,42 +1,64 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MiListaCard());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  // This widget is the root of your application.
+class MiListaCard extends StatelessWidget {
+  const MiListaCard({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Application name
-      title: 'Flutter Hello World',
-      // Application theme data, you can set the colors for the application as
-      // you want
+      title: "App ListView Anaya",
       theme: ThemeData(
-        // useMaterial3: true,
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
-      // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: PaginaInicio(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({super.key, required this.title});  
+class PaginaInicio extends StatefulWidget {
+  const PaginaInicio({Key? key}) : super(key: key);
 
+  @override
+  State<PaginaInicio> createState() => _PaginaInicioState();
+}
+
+class _PaginaInicioState extends State<PaginaInicio> {
+  List<String> images = [
+    "assets/images/LogoWWE.png",
+    "assets/images/LogoWWE2.png",
+    "assets/images/LogoWWE3.png",
+    "assets/images/LogoWWE4.jpg",
+    "assets/images/LogoWWE5.jpg",
+    "assets/images/LogoWWE6.jpg",
+    "assets/images/LogoWWE7.jpg",
+    "assets/images/LogoWWE8.png",
+    "assets/images/LogoWWE9.jpg",
+    "assets/images/LogoWWE10.png",
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // The title text which will be shown on the action bar
-        title: Text(title),
+        title: const Text("ListView Angel Anaya"),
       ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
-        ),
+      body: ListView.builder(
+        itemBuilder: (BuildContext, index) {
+          return Card(
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage(images[index]),
+              ),
+              title: Text("This is title"),
+              subtitle: Text("This is subtitle"),
+            ),
+          );
+        },
+        itemCount: images.length,
+        shrinkWrap: true,
+        padding: EdgeInsets.all(5),
+        scrollDirection: Axis.vertical,
       ),
     );
   }
